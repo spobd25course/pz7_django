@@ -1,0 +1,34 @@
+<div class="bb-item">
+    <h2>{{ bb.title }}</h2>
+
+    {% if bb.image %}
+        <p>
+            <img src="{{ bb.image.url }}" alt="Фото"
+                 style="max-width: 300px; height: auto;">
+        </p>
+
+    {% endif %}
+    <p>{{ bb.content }}</p>
+
+    <p>
+        <a href="{% url 'rubric_bbs' bb.rubric.pk %}">{{ bb.rubric.name }}</a>
+    </p>
+
+    <p>
+        {% if bb.stickers.all %}
+            <strong>Метки:</strong>
+            {% for sticker in bb.stickers.all %}
+                <span style="background-color: #eee; padding: 2px 5px; margin-right: 5px; border-radius: 3px;">
+                    {{ sticker.name }}
+                </span>
+            {% endfor %}
+        {% endif %}
+    </p>
+
+    <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>
+
+    <p>
+        <a href="{% url 'edit' bb.pk %}">Редактировать</a> |
+        <a href="{% url 'delete' bb.pk %}">Удалить</a>
+    </p>
+</div>

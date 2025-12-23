@@ -1,0 +1,22 @@
+{% extends "layout/basic.html" %}
+{% block content %}
+
+<h2>Добавить объявление (без перезагрузки)</h2>
+
+<form id="add-form" method="post" enctype="multipart/form-data" action="{% url 'ajax_add' %}">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Добавить">
+</form>
+
+<div id="form-errors" style="color: red; margin-top: 10px;"></div>
+
+<hr>
+
+<div id="bbs-list">
+    {% for bb in bbs %}
+        {% include "bboard/_bb_item.html" with bb=bb %}
+    {% endfor %}
+</div>
+{% endblock %}
